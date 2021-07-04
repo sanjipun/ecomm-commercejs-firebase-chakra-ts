@@ -39,7 +39,8 @@ const Navbar: React.FC<NavbarProps> = () => {
     const Products = async () => {
         try {
             const response = await commerce.products.list()
-            console.log(response)
+            console.log(response.data)
+            console.table(response.data)
         } catch (error) {
             console.log(error)
         }
@@ -49,7 +50,7 @@ const Navbar: React.FC<NavbarProps> = () => {
     }, [])
 
     return (
-        <Box w="100%" d="flex" justifyContent="space-between" alignItems="center" padding="15px 50px">
+        <Box backgroundColor="#fff" position="fixed" zIndex={1} h={70} top={0} w="100%" d="flex" justifyContent="space-between" alignItems="center" padding="15px 50px">
             <HStack spacing={9}>
                 {NavigationMenu.map((nm: nmTypes) => {
                     return (
