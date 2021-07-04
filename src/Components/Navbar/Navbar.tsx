@@ -114,12 +114,12 @@ const Navbar: React.FC<NavbarProps> = () => {
         )
     }
     return (
-        <Box backgroundColor="#fff" position="fixed" zIndex={1} h={70} top={0} w="100%" d="flex" justifyContent="space-between" alignItems="center" padding="15px 50px">
+        <Box backgroundColor="#fff" position="fixed" zIndex={1} h={70} top={0} w="100%" d="flex" justifyContent="space-between" alignItems="center" padding={isTablet ? "15px 20px" : "15px 50px"}>
             {!isTablet && <LeftNav />}
             <Logo style={{ width: "auto", height: 60 }} />
             {!isMobile &&
                 <RightNav />}
-            {isTablet && <Button variant="primary" ref={btnRef} colorScheme="teal" onClick={onOpen}>
+            {isTablet && <Button padding="0px 50px" variant="primary" ref={btnRef} colorScheme="teal" onClick={onOpen}>
                 <HamburgerIcon />
             </Button>}
             <Drawer
