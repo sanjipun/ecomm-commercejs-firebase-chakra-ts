@@ -10,11 +10,11 @@ const ProductCard: React.FC<ProductCardProps> = () => {
     const reviews = 134
     const discount = true
     return (
-        <Box cursor="pointer" _hover={{
+        <Box borderRadius={4} border="0.5px solid rgba(0,0,0,0.2)" cursor="pointer" _hover={{
             boxShadow: "0px 0px 50px rgba(0, 0, 0, 0.1)"
         }} d="flex" flexDirection="column" justifyContent="space-between" overflow="hidden" w={219} h={400} >
             <Image src={BBDG} w="auto" h="330px" />
-            <Box h="100%" textAlign="center" backgroundColor="#fff">
+            <Box borderTop="0.5px solid rgba(0,0,0,0.2)" h="100%" textAlign="center" backgroundColor="#fff">
                 <Text fontSize={14} >Blue Button Down Gown</Text>
                 <Text fontSize={12} >{discount ? <><del>NPR. 200</del> NRP. 1500</> : "NRP. 2000"}</Text>
                 <Center>
