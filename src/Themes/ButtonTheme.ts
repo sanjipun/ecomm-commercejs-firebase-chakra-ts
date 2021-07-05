@@ -4,7 +4,7 @@ export const Button = {
         textTransform: "uppercase",
         letterSpacing: 2,
         padding: "25px 40px",
-        borderRadius: 6
+        borderRadius: 0
     },
     variants: {
         default: {
