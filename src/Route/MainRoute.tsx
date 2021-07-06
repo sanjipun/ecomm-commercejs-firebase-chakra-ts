@@ -7,6 +7,7 @@ import CategoryPage from 'Views/CategoryPage/CategoryPage';
 import AuthRoute from './AuthRoute';
 import MyCart from 'Views/MyCartPage/MyCart';
 import CheckoutPage from 'Views/CheckoutPage/CheckoutPage';
+import Profile from 'Views/Profile/Profile';
 
 interface MainRouteProps { }
 
@@ -19,6 +20,7 @@ const MainRoute: React.FC<MainRouteProps> = () => {
                 <Route path="/category" component={CategoryPage} />
                 <Route path="/my-cart" component={MyCart} />
                 <Route path="/checkout" component={CheckoutPage} />
+                <Route path="/profile" component={Profile} />
                 <Route exact path="/" component={Landing} />
             </Switch>
         </MainLayout>

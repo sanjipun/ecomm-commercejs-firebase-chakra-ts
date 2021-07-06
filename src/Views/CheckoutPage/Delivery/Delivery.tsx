@@ -16,7 +16,7 @@ const Delivery: React.FC<DeliveryProps> = () => {
                     </VStack>
                 </RadioGroup>
             </VStack>
-            <VStack alignItems="flex-start" p={5} border="1px solid rgba(0,0,0,0.2)">
+            <VStack mt="30px" alignItems="flex-start" p={5} border="1px solid rgba(0,0,0,0.2)">
                 <Text mt="50px"><Center><CheckCircleIcon mr={3} color="#ED165F" /> Payment Method</Center></Text>
                 <RadioGroup colorScheme="pink">
                     <VStack mt="50px" alignItems="flex-start">
