@@ -8,8 +8,15 @@ export const Button = {
     },
     variants: {
         default: {
-            border: "1px solid #000",
-            color: "#000",
+            color: "#fff",
+            backgroundColor: "#ED165F",
+            transition: "all 0.2s ease",
+            letterSpacing: "none",
+            _hover: {
+                backgroundColor: "#fff",
+                color: "#000",
+                border: "1px solid #000"
+            }
         },
         primary: {
             bg: "#ED165F",
