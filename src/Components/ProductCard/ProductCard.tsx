@@ -2,15 +2,17 @@ import { StarIcon } from '@chakra-ui/icons';
 import { Box, Center, HStack, Image, Text } from '@chakra-ui/react';
 import BBDG from "Assets/Dress/Blue Button Down Gown.png"
 import React from 'react';
+import { useHistory } from 'react-router';
 
 interface ProductCardProps { }
 
 const ProductCard: React.FC<ProductCardProps> = () => {
+    const history = useHistory()
     const rating = 4.5
     const reviews = 134
     const discount = true
     return (
-        <Box borderRadius={4} border="0.5px solid rgba(0,0,0,0.2)" cursor="pointer" _hover={{
+        <Box onClick={() => history.push("/product/mini_skirt")} borderRadius={4} border="0.5px solid rgba(0,0,0,0.2)" cursor="pointer" _hover={{
             boxShadow: "0px 0px 50px rgba(0, 0, 0, 0.1)"
         }} d="flex" flexDirection="column" justifyContent="space-between" overflow="hidden" w={219} h={400} >
             <Image src={BBDG} w="auto" h="330px" />
