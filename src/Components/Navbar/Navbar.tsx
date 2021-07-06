@@ -18,20 +18,20 @@ interface nmTypes {
 }
 const NavigationMenu = [
     {
-        name: "Home",
-        linkTo: "/",
+        name: "All Categories",
+        linkTo: "/category/all",
     },
     {
         name: "Clothes",
-        linkTo: "/clothes",
+        linkTo: "/category/clothes",
     },
     {
         name: "Shoes",
-        linkTo: "/shoes",
+        linkTo: "/category/shoes",
     },
     {
         name: "Accessories",
-        linkTo: "/accessories",
+        linkTo: "/category/accessories",
     },
 ]
 const Navbar: React.FC<NavbarProps> = () => {
@@ -59,7 +59,7 @@ const Navbar: React.FC<NavbarProps> = () => {
             <> {!isTablet && <HStack spacing={9}>
                 {NavigationMenu.map((nm: nmTypes) => {
                     return (
-                        <Text key={nm.name} onClick={() => history.push(`/${nm.linkTo}`)}>{nm.name}</Text>
+                        <Text cursor="pointer" key={nm.name} onClick={() => history.push(`${nm.linkTo}`)}>{nm.name}</Text>
                     )
                 })}
             </HStack>}
@@ -87,11 +87,11 @@ const Navbar: React.FC<NavbarProps> = () => {
                             <SearchIcon />
                         </InputRightElement>
                     </InputGroup>
-                    <UserIcon style={{ width: 30, height: 30 }} />
+                    <UserIcon cursor="pointer" style={{ width: 30, height: 30 }} />
                     <Badge count={5}>
-                        <CartIcon style={{ width: 20, height: 20 }} />
+                        <CartIcon cursor="pointer" style={{ width: 20, height: 20 }} />
                     </Badge>
-                    <FavIcon style={{ width: 30, height: 30 }} />
+                    <FavIcon cursor="pointer" style={{ width: 30, height: 30 }} />
                 </HStack>}
                 {isMobile && <VStack margin="0px 20px" spacing={9}>
                     <InputGroup size="sm">

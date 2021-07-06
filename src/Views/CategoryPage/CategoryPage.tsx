@@ -1,4 +1,4 @@
-import { Button, Text, Grid, GridItem, Divider, VStack, HStack, Badge, Checkbox, Input } from '@chakra-ui/react';
+import { Button, Text, Grid, GridItem, Divider, VStack, HStack, Badge, Checkbox, Input, useMediaQuery } from '@chakra-ui/react';
 import ProductCard from 'Components/ProductCard/ProductCard';
 import React from 'react';
 
@@ -30,12 +30,13 @@ const categories = [
     },
 ]
 const CategoryPage: React.FC<CategoryProps> = () => {
-    return (
-        <Grid m="100px 50px 0px" templateColumns="repeat(4,1fr)">
-            <GridItem colSpan={4} mb={5}>
-                <Text textTransform="uppercase" fontSize={30}>Clothes</Text>
-            </GridItem>
-            <GridItem maxW="315px" colSpan={1}>
+    const [isTablet] = useMediaQuery("(max-width:768px)");
+    return (<>
+        <Text m="100px 50px 0px" textTransform="uppercase" fontSize={30}>Clothes</Text>
+        <Grid m="50px" d={isTablet ? "flex" : undefined} templateColumns="repeat(4,1fr)">
+            {/*<GridItem colSpan={4} mb={5}>
+            </GridItem>*/}
+            {!isTablet && <GridItem maxW="315px" colSpan={1}>
                 <VStack alignItems="flex-start" mt={5} >
                     <Text textTransform="uppercase">Category</Text>
                     <Divider h={3} />
@@ -66,10 +67,10 @@ const CategoryPage: React.FC<CategoryProps> = () => {
                         <Input w={100} /><Text>to</Text><Input w={100} /><Button variant="primary" padding="0px 15px" letterSpacing={0}>Apply</Button>
                     </HStack>
                 </VStack>
-            </GridItem>
+            </GridItem>}
             <GridItem colSpan={3}>
-                <Grid templateColumns={3} gap={5} d="flex" justifyContent="space-around" flexWrap="wrap">
-                    <GridItem colSpan={1}>
+                <Grid w="100%" templateColumns={3} gap={5} d="flex" justifyContent={isTablet ? "center" : "space-around"} flexWrap="wrap">
+                    <GridItem colSpan={isTablet ? 3 : 1} >
                         <ProductCard />
                     </GridItem>
                     <GridItem colSpan={1}>
@@ -90,6 +91,7 @@ const CategoryPage: React.FC<CategoryProps> = () => {
                 </Grid>
             </GridItem>
         </Grid>
+    </>
     );
 };
 

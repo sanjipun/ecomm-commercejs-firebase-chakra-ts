@@ -13,7 +13,7 @@ const MainRoute: React.FC<MainRouteProps> = () => {
             <Switch>
                 <Route exact path="/" component={Landing} />
                 <Route exact path="/products" component={ProductPage} />
-                <Route exact path="/category" component={CategoryPage} />
+                <Route path="/category" component={CategoryPage} />
             </Switch>
         </MainLayout>
     );
