@@ -96,9 +96,9 @@ const Navbar: React.FC<NavbarProps> = () => {
                     </InputGroup>
                     <UserIcon onClick={() => LoggedIn ? history.push("/dashboard") : history.push("/auth/login")} cursor="pointer" style={{ width: 30, height: 30 }} />
                     <Badge count={5}>
-                        <CartIcon cursor="pointer" style={{ width: 20, height: 20 }} />
+                        <CartIcon onClick={() => history.push("/my-cart")} cursor="pointer" style={{ width: 20, height: 20 }} />
                     </Badge>
-                    <FavIcon cursor="pointer" style={{ width: 30, height: 30 }} />
+                    <FavIcon onClick={() => history.push("/favourites")} cursor="pointer" style={{ width: 30, height: 30 }} />
                 </HStack>}
                 {isMobile && <VStack margin="0px 20px" spacing={9}>
                     <InputGroup size="sm">
