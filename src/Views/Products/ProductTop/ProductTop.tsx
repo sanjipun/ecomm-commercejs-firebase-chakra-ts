@@ -1,5 +1,5 @@
 import { StarIcon } from '@chakra-ui/icons';
-import { Button, Text, Breadcrumb, BreadcrumbItem, BreadcrumbLink, Center, Grid, GridItem, Image, VStack, HStack, Divider, Box, Select, Flex, useMediaQuery } from '@chakra-ui/react';
+import { Button, Text, Breadcrumb, BreadcrumbItem, BreadcrumbLink, Center, Grid, GridItem, Image, VStack, HStack, Divider, Box, Select, Flex, useMediaQuery, useToast } from '@chakra-ui/react';
 import MiniSkirt from "Assets/Dress/Mini Skirt.png"
 import { ReactComponent as FavIcon } from "Assets/Icons/Fav copy.svg"
 import { ReactComponent as CartIcon } from "Assets/Icons/Cart copy.svg"
@@ -10,12 +10,41 @@ interface ProductTopProps { }
 
 const ProductTop: React.FC<ProductTopProps> = () => {
     const [isTablet] = useMediaQuery("(max-width:768px)");
-    const [itemCount, setItemCount] = useState<number>(1)
+    const [itemCount, setItemCount] = useState<number>(1);
+
+    const toast = useToast();
     const handleChangeComplete = (color: any, event: any) => {
-        console.log(color.hex)
+        console.log(color.hex);
     }
     const handleAddToCart = () => {
-        console.log("added")
+        const data = {
+            productName: "Mini Skirt",
+            numberOfItems: 5,
+            size: "md",
+            category: "dress",
+        };
+        localStorage.setItem("SafariCart", JSON.stringify(data));
+        toast({
+            title: "Successfully Added To Cart.",
+            status: "success",
+            duration: 3000,
+            isClosable: true,
+        })
+    }
+    const handleAddToFav = () => {
+        const data = {
+            productName: "Mini Skirt",
+            numberOfItems: 5,
+            size: "md",
+            category: "dress",
+        };
+        localStorage.setItem("SafariFav", JSON.stringify(data));
+        toast({
+            title: "Successfully Added To Favourites.",
+            status: "success",
+            duration: 3000,
+            isClosable: true,
+        })
     }
     return (
         <Grid m="100px 50px" templateColumns="repeat(2,1fr)">
@@ -90,7 +119,7 @@ const ProductTop: React.FC<ProductTopProps> = () => {
                         </HStack>
                         <HStack mt={5}>
                             <Button onClick={handleAddToCart} variant="primary"><CartIcon style={{ marginRight: 10 }} /> Add To Cart</Button>
-                            <Button variant="primary"><FavIcon /></Button>
+                            <Button onClick={handleAddToFav} variant="primary"><FavIcon /></Button>
                         </HStack>
                     </Flex>
                 </VStack>
