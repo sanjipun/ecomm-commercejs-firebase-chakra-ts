@@ -1,26 +1,18 @@
 import { Button, Checkbox, FormLabel, Grid, GridItem, Text, VStack, Input, useToast } from '@chakra-ui/react';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';
+import { Link, useHistory } from 'react-router-dom';
+import { PostRegisterRequest, ResetError, ResetSuccess } from '../AuthRedux/AuthAction';
+import { RegisterForm } from '../AuthRedux/AuthConstants';
 
 
-interface RegisterProps {
-
-}
-interface RegisterForm {
-    firstName: string,
-    lastName: string,
-    email: string,
-    password: string,
-    confirmPassword: string,
-    newsletter?: boolean
-}
-
-
+interface RegisterProps { }
 
 const Register: React.FC<RegisterProps> = () => {
-    const toast = useToast()
-
+    const history = useHistory();
+    const toast = useToast();
+    const dispatch = useDispatch();
     const { register, handleSubmit, watch, formState: { errors } } = useForm<RegisterForm>();
     const onSubmit: SubmitHandler<RegisterForm> = data => {
         if (watch("password") !== watch("confirmPassword")) {
@@ -33,9 +25,35 @@ const Register: React.FC<RegisterProps> = () => {
                 isClosable: true,
             })
         } else {
-            console.log(data)
+            dispatch(PostRegisterRequest(data))
         }
     };
+    const Auth = useSelector((state: RootStateOrAny) => state.Register)
+    useEffect(() => {
+        if (Auth.RegisterError) {
+            toast({
+                title: "Registration Failed.",
+                description: Auth.RegisterError,
+                status: "error",
+                duration: 5000,
+                position: "top",
+                isClosable: true,
+                onCloseComplete: () => dispatch(ResetError())
+            })
+        } else if (!Auth.error && Auth.RegisterSuccess) {
+            history.push("/auth/login")
+            toast({
+                title: "Registration Success.",
+                description: "asdasd",
+                status: "success",
+                duration: 5000,
+                position: "top",
+                isClosable: true,
+                onCloseComplete: () => dispatch(ResetSuccess())
+            })
+        }
+    }, [dispatch, Auth, toast, history])
+
     return (
         <Grid m="100px 50px" templateColumns="repeat(1,1fr)" >
             <GridItem colSpan={1}>
@@ -46,7 +64,7 @@ const Register: React.FC<RegisterProps> = () => {
                     Please <Link to="/auth/login" style={{ color: "dodgerblue" }}>sign in</Link>  or create an account to continue.
                 </Text>
                 <VStack mt={30} alignItems="flex-start">
-                    <Text>SIGN IN</Text>
+                    <Text>CREATE AN ACCOUNT</Text>
                     <form style={{ width: 400 }} onSubmit={handleSubmit(onSubmit)}>
                         <VStack alignItems="flex-start">
                             <FormLabel>First Name</FormLabel>

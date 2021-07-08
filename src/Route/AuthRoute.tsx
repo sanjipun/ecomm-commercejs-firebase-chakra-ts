@@ -6,7 +6,6 @@ import Register from 'Views/Auth/Register/Register';
 interface AuthRouteProps { }
 
 const AuthRoute: React.FC<AuthRouteProps> = () => {
-    console.log("auth")
     return (
         <Switch>
             <Route exact path="/auth/login" component={Login} />

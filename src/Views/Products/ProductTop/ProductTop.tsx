@@ -14,6 +14,9 @@ const ProductTop: React.FC<ProductTopProps> = () => {
     const handleChangeComplete = (color: any, event: any) => {
         console.log(color.hex)
     }
+    const handleAddToCart = () => {
+        console.log("added")
+    }
     return (
         <Grid m="100px 50px" templateColumns="repeat(2,1fr)">
             <GridItem overflow="hidden" colSpan={2}>
@@ -86,7 +89,7 @@ const ProductTop: React.FC<ProductTopProps> = () => {
                             </Box>
                         </HStack>
                         <HStack mt={5}>
-                            <Button variant="primary"><CartIcon style={{ marginRight: 10 }} /> Add To Cart</Button>
+                            <Button onClick={handleAddToCart} variant="primary"><CartIcon style={{ marginRight: 10 }} /> Add To Cart</Button>
                             <Button variant="primary"><FavIcon /></Button>
                         </HStack>
                     </Flex>

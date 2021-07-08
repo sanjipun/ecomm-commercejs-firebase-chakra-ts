@@ -87,7 +87,7 @@ const CategoryPage: React.FC<CategoryProps> = () => {
     }
     return (<>
         <Text m="100px 50px 0px" textTransform="uppercase" fontSize={30}>Clothes</Text>
-        <Grid m="50px" d={isTablet ? "flex" : undefined} templateColumns="repeat(4,1fr)">
+        <Grid m="50px" gap={5} d={isTablet ? "flex" : undefined} templateColumns="repeat(4,1fr)">
             {/*<GridItem colSpan={4} mb={5}>
             </GridItem>*/}
             {!isTablet && <GridItem maxW="315px" colSpan={1}>

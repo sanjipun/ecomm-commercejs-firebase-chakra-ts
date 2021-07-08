@@ -1,4 +1,4 @@
-import { Box, Button, Center, Divider, Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerHeader, DrawerOverlay, HStack, Input, InputGroup, InputRightElement, Text, useDisclosure, useMediaQuery, VStack } from '@chakra-ui/react';
+import { Box, Button, Center, Divider, Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerHeader, DrawerOverlay, HStack, Icon, Input, InputGroup, InputRightElement, Text, useDisclosure, useMediaQuery, VStack } from '@chakra-ui/react';
 import { useHistory } from "react-router-dom";
 import { ReactComponent as Logo } from "Assets/Logo/Logo.svg"
 import React, { useEffect, useState } from 'react';
@@ -46,18 +46,18 @@ const Navbar: React.FC<NavbarProps> = () => {
     const handleSearch = () => {
         console.log(searchParam)
     }
-    const Products = async () => {
-        try {
-            const response = await commerce.products.list();
-            console.log(response.data);
-            console.table(response.data);
-        } catch (error) {
-            console.log(error);
-        }
-    }
-    useEffect(() => {
-        Products()
-    }, [])
+    //const Products = async () => {
+    //    try {
+    //        const response = await commerce.products.list();
+    //        console.log(response.data);
+    //        console.table(response.data);
+    //    } catch (error) {
+    //        console.log(error);
+    //    }
+    //}
+    //useEffect(() => {
+    //    Products()
+    //}, [])
 
     const LeftNav = () => {
         return (
