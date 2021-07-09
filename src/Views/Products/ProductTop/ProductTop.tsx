@@ -5,14 +5,17 @@ import { ReactComponent as FavIcon } from "Assets/Icons/Fav copy.svg"
 import { ReactComponent as CartIcon } from "Assets/Icons/Cart copy.svg"
 import { CirclePicker } from 'react-color';
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { AddToCart, AddToFav } from './ProductTopAction';
 
 interface ProductTopProps { }
 
 const ProductTop: React.FC<ProductTopProps> = () => {
     const [isTablet] = useMediaQuery("(max-width:768px)");
     const [itemCount, setItemCount] = useState<number>(1);
-
     const toast = useToast();
+    const dispatch = useDispatch();
+
     const handleChangeComplete = (color: any, event: any) => {
         console.log(color.hex);
     }
@@ -22,8 +25,9 @@ const ProductTop: React.FC<ProductTopProps> = () => {
             numberOfItems: 5,
             size: "md",
             category: "dress",
+            color: "red"
         };
-        localStorage.setItem("SafariCart", JSON.stringify(data));
+        dispatch(AddToCart(data))
         toast({
             title: "Successfully Added To Cart.",
             status: "success",
@@ -37,8 +41,9 @@ const ProductTop: React.FC<ProductTopProps> = () => {
             numberOfItems: 5,
             size: "md",
             category: "dress",
+            color: "red"
         };
-        localStorage.setItem("SafariFav", JSON.stringify(data));
+        dispatch(AddToFav(data));
         toast({
             title: "Successfully Added To Favourites.",
             status: "success",
