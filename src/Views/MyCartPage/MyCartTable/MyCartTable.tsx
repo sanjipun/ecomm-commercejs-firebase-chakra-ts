@@ -3,9 +3,11 @@ import React from 'react';
 import MiniSkirt from "Assets/Dress/Mini Skirt.png";
 import { ReactComponent as FavIcon } from "Assets/Icons/Fav2.svg";
 
-interface MyCartTableProps { }
+interface MyCartTableProps {
+    data?: any
+}
 
-const MyCartTable: React.FC<MyCartTableProps> = () => {
+const MyCartTable: React.FC<MyCartTableProps> = ({ data }) => {
     const [isTablet] = useMediaQuery("(max-width:768px)");
     return (
         <Grid mt="50px" templateColumns="repeat(6,1fr)">
@@ -17,38 +19,42 @@ const MyCartTable: React.FC<MyCartTableProps> = () => {
                                 <Th>Item Description</Th>
                                 <Th>Quantity</Th>
                                 <Th>Unit Price</Th>
-                                <Th>Sub Total</Th>
                             </Tr>
                         </Thead>
-                        <Tbody>
-                            <Tr>
-                                <Td>
-                                    <HStack>
-                                        <Center><Image w={100} h={100} objectFit="cover" src={MiniSkirt} /></Center>
-                                        <Stat>
-                                            <VStack alignItems="flex-start">
-                                                <StatLabel fontWeight={900} fontSize={20}>Mini Skirt</StatLabel>
-                                                <Text>Size : xl</Text>
-                                                <HStack spacing={5} justifyContent="space-between" alignItems="center">
-                                                    <HStack color="#ED165F"><FavIcon style={{ color: "#ED165F" }} /><Text>Move to Favourite</Text></HStack>
-                                                    <HStack color="#ED165F" justifyContent="center" alignItems="center"><Text>X Remove</Text></HStack>
+                        {
+                            data?.map((d: any) => {
+                                return (
+                                    <Tbody>
+                                        <Tr>
+                                            <Td>
+                                                <HStack>
+                                                    <Center><Image w={100} h={100} objectFit="cover" src={d?.productImage} /></Center>
+                                                    <Stat>
+                                                        <VStack alignItems="flex-start">
+                                                            <StatLabel fontWeight={900} fontSize={20}>{d?.productName}</StatLabel>
+                                                            <Text>Size : xl</Text>
+                                                            <HStack spacing={5} justifyContent="space-between" alignItems="center">
+                                                                <HStack color="#ED165F"><FavIcon style={{ color: "#ED165F" }} /><Text>Move to Favourite</Text></HStack>
+                                                                <HStack color="#ED165F" justifyContent="center" alignItems="center"><Text>X Remove</Text></HStack>
+                                                            </HStack>
+                                                        </VStack>
+                                                    </Stat>
                                                 </HStack>
-                                            </VStack>
-                                        </Stat>
-                                    </HStack>
-                                </Td>
-                                <Td>
-                                    <Select w={120}>
-                                        <option value={1}>1</option>
-                                        <option value={2}>2</option>
-                                        <option value={3}>3</option>
-                                        <option value={4}>4</option>
-                                    </Select>
-                                </Td>
-                                <Td>5000</Td>
-                                <Td>5000</Td>
-                            </Tr>
-                        </Tbody>
+                                            </Td>
+                                            <Td>
+                                                <Select w={120} defaultValue={data?.numberOfItems}>
+                                                    <option value={1}>1</option>
+                                                    <option value={2}>2</option>
+                                                    <option value={3}>3</option>
+                                                    <option value={4}>4</option>
+                                                </Select>
+                                            </Td>
+                                            <Td>{data?.price}</Td>
+                                        </Tr>
+                                    </Tbody>
+                                )
+                            })
+                        }
                         <Tfoot>
                             <Tr>
                                 <Th>Total Unique Items: 5</Th>

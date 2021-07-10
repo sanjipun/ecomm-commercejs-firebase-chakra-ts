@@ -1,6 +1,5 @@
 import { ofType } from "redux-observable";
 import { API } from "Redux/Apis";
-import { tap } from "rxjs";
 import { of } from "rxjs";
 import { catchError } from "rxjs";
 import { mergeMap } from "rxjs";

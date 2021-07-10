@@ -1,6 +1,5 @@
 import React, { useEffect, useRef } from 'react';
 import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';
-import { API } from 'Redux/Apis';
 import Hero from './Hero/Hero';
 import { GetLandingProductsRequest } from './LandingAction';
 import Products from './Products/Products';
@@ -19,7 +18,7 @@ const Landing: React.FC<LandingProps> = () => {
         if (LandingProducts === undefined) {
             dispatch(GetLandingProductsRequest());
         }
-    }, [])
+    }, [LandingProducts, dispatch])
     return (
         <>
             <Hero onClick={executeScroll} />

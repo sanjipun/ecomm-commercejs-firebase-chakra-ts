@@ -1,16 +1,15 @@
-import { Box, Button, Center, Divider, Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerHeader, DrawerOverlay, HStack, Icon, Input, InputGroup, InputRightElement, Text, useDisclosure, useMediaQuery, VStack } from '@chakra-ui/react';
+import { Box, Button, Center, Divider, Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerHeader, DrawerOverlay, HStack, Input, InputGroup, InputRightElement, Text, useDisclosure, useMediaQuery, VStack } from '@chakra-ui/react';
 import { useHistory } from "react-router-dom";
 import { ReactComponent as Logo } from "Assets/Logo/Logo.svg"
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { HamburgerIcon, SearchIcon } from '@chakra-ui/icons';
 import { ReactComponent as UserIcon } from "Assets/Icons/User.svg"
 import { ReactComponent as CartIcon } from "Assets/Icons/Cart.svg"
 import { ReactComponent as FavIcon } from "Assets/Icons/Fav.svg"
 import Badge from '@uiw/react-badge';
-import { commerce } from 'CommerceJs/CommerceJs';
+import { RootStateOrAny, useSelector } from 'react-redux';
 
-interface NavbarProps {
-}
+interface NavbarProps { }
 
 interface nmTypes {
     name: string,
@@ -46,18 +45,7 @@ const Navbar: React.FC<NavbarProps> = () => {
     const handleSearch = () => {
         console.log(searchParam)
     }
-    //const Products = async () => {
-    //    try {
-    //        const response = await commerce.products.list();
-    //        console.log(response.data);
-    //        console.table(response.data);
-    //    } catch (error) {
-    //        console.log(error);
-    //    }
-    //}
-    //useEffect(() => {
-    //    Products()
-    //}, [])
+    const NoOfItemsInCart = useSelector((state: RootStateOrAny) => state.ProductTop.NoOfItemsInCart);
 
     const LeftNav = () => {
         return (
@@ -95,7 +83,7 @@ const Navbar: React.FC<NavbarProps> = () => {
                         </InputGroup>
                     </InputGroup>
                     <UserIcon onClick={() => LoggedIn ? history.push("/dashboard") : history.push("/auth/login")} cursor="pointer" style={{ width: 30, height: 30 }} />
-                    <Badge count={5}>
+                    <Badge count={!NoOfItemsInCart ? 0 : NoOfItemsInCart}>
                         <CartIcon onClick={() => history.push("/my-cart")} cursor="pointer" style={{ width: 20, height: 20 }} />
                     </Badge>
                     <FavIcon onClick={() => history.push("/favourites")} cursor="pointer" style={{ width: 30, height: 30 }} />
