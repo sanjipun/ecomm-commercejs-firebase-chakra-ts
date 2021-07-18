@@ -18,7 +18,7 @@ const MainRoute: React.FC<MainRouteProps> = () => {
             <Switch>
                 <Route path="/auth" component={AuthRoute} />
                 <Route path="/product/:slug" component={ProductPage} />
-                <Route path="/category" component={CategoryPage} />
+                <Route path="/category/:slug" component={CategoryPage} />
                 <Route path="/my-cart" component={MyCart} />
                 <Route path="/favourites" component={FavouriteProducts} />
                 <Route path="/not-found" component={NotFound} />

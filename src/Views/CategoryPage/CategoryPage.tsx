@@ -1,8 +1,9 @@
 import { UpDownIcon } from '@chakra-ui/icons';
 import { Button, Text, Grid, GridItem, Divider, VStack, HStack, Badge, Checkbox, Input, useMediaQuery, Select, Flex, CheckboxGroup, useDisclosure, Drawer, DrawerContent, DrawerHeader, DrawerBody, DrawerCloseButton, DrawerOverlay } from '@chakra-ui/react';
 import ProductCard from 'Components/ProductCard/ProductCard';
-import React, { useState } from 'react';
-import { useHistory } from 'react-router';
+import React, { useEffect, useState } from 'react';
+import { useHistory, useParams } from 'react-router';
+import { API } from 'Redux/Apis';
 
 interface CategoryProps { }
 
@@ -11,12 +12,16 @@ const sizes = ["xxs", "xs",
 ]
 const categories = [
     {
-        name: "All",
-        linkTo: "/category/all"
+        name: "All Categories",
+        linkTo: "/category/all",
     },
     {
-        name: "Accessories",
-        linkTo: "/category/accessories"
+        name: "Clothes",
+        linkTo: "/category/cat_RqEv5xn39wZz4j",
+    },
+    {
+        name: "Shoes",
+        linkTo: "/category/cat_8XxzoBznVoPQAZ",
     },
     {
         name: "Bags",
@@ -27,10 +32,11 @@ const categories = [
         linkTo: "/category/dress"
     },
     {
-        name: "Clothes",
-        linkTo: "/category/clothes"
+        name: "Accessories",
+        linkTo: "/category/cat_VKXmwDe2VorgDA",
     },
 ]
+
 const CategoryPage: React.FC<CategoryProps> = () => {
     const history = useHistory()
     const [size, setSize] = useState<string>("")
@@ -38,14 +44,38 @@ const CategoryPage: React.FC<CategoryProps> = () => {
     const [startPrice, setStartPrice] = useState<string>("")
     const [endPrice, setEndPrice] = useState<string>("")
     const [sortParam, setSortParam] = useState<string>("Most Popular")
+    const [productData, setProductData] = useState<any>()
     const [isTablet] = useMediaQuery("(max-width:768px)");
 
     const { isOpen, onOpen, onClose } = useDisclosure()
     const btnRef = React.useRef<any>()
 
-    console.log(price, size, startPrice, endPrice)
+    const { slug } = useParams<any>()
 
-
+    const fetchData = async () => {
+        try {
+            const res = await API.get("/v1/categories")
+            setProductData(res.data.data)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+    const fetchCategory = async () => {
+        try {
+            const res = await API.get(`/v1/products?category_id=${slug}`)
+            setProductData(res.data.data)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+    useEffect(() => {
+        if (slug === "all") {
+            fetchData();
+        } else {
+            fetchCategory();
+        }
+    }, [slug])
+    console.log(productData)
     const DrawerItems = () => {
         return (
             <>
@@ -121,24 +151,15 @@ const CategoryPage: React.FC<CategoryProps> = () => {
                 </Flex>
                 <Divider mt={1} />
                 <Grid mt={5} w="100%" templateColumns={3} gap={5} d="flex" justifyContent={isTablet ? "center" : "space-around"} flexWrap="wrap">
-                    <GridItem colSpan={isTablet ? 3 : 1} >
-                        <ProductCard />
-                    </GridItem>
-                    <GridItem colSpan={1}>
-                        <ProductCard />
-                    </GridItem>
-                    <GridItem colSpan={1}>
-                        <ProductCard />
-                    </GridItem>
-                    <GridItem colSpan={1}>
-                        <ProductCard />
-                    </GridItem>
-                    <GridItem colSpan={1}>
-                        <ProductCard />
-                    </GridItem>
-                    <GridItem colSpan={1}>
-                        <ProductCard />
-                    </GridItem>
+                    {productData?.map((pd: any) => {
+                        return (
+                            <GridItem key={pd.id} colSpan={isTablet ? 3 : 1} >
+                                <ProductCard data={pd} />
+                            </GridItem>
+                        )
+                    })}
+
+
                 </Grid>
             </GridItem>
         </Grid>

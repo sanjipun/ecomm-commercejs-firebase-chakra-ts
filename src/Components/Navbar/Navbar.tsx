@@ -22,15 +22,15 @@ const NavigationMenu = [
     },
     {
         name: "Clothes",
-        linkTo: "/category/clothes",
+        linkTo: "/category/cat_RqEv5xn39wZz4j",
     },
     {
         name: "Shoes",
-        linkTo: "/category/shoes",
+        linkTo: "/category/cat_8XxzoBznVoPQAZ",
     },
     {
         name: "Accessories",
-        linkTo: "/category/accessories",
+        linkTo: "/category/cat_VKXmwDe2VorgDA",
     },
 ]
 const Navbar: React.FC<NavbarProps> = () => {

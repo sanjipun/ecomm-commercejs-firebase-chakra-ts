@@ -28,7 +28,8 @@ export const ProductTopReducer: Reducer<any, any> = (state = INIT_STATE, action:
             return {
                 ...state,
                 CartItems: nextCart,
-                NoOfItemsInCart: nextCart.length
+                NoOfItemsInCart: nextCart.length,
+                price: action.payload.price
             };
         }
         case ADD_TO_FAV: {

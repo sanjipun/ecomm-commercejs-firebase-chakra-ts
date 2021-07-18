@@ -9,6 +9,7 @@ interface MyCartTableProps {
 
 const MyCartTable: React.FC<MyCartTableProps> = ({ data }) => {
     const [isTablet] = useMediaQuery("(max-width:768px)");
+    console.log(data)
     return (
         <Grid mt="50px" templateColumns="repeat(6,1fr)">
             <GridItem colSpan={6}>
@@ -42,14 +43,14 @@ const MyCartTable: React.FC<MyCartTableProps> = ({ data }) => {
                                                 </HStack>
                                             </Td>
                                             <Td>
-                                                <Select w={120} defaultValue={data?.numberOfItems}>
+                                                <Select w={120} value={d?.numberOfItems}>
                                                     <option value={1}>1</option>
                                                     <option value={2}>2</option>
                                                     <option value={3}>3</option>
                                                     <option value={4}>4</option>
                                                 </Select>
                                             </Td>
-                                            <Td>{data?.price}</Td>
+                                            <Td>NRP {d?.price}</Td>
                                         </Tr>
                                     </Tbody>
                                 )
@@ -89,7 +90,7 @@ const MyCartTable: React.FC<MyCartTableProps> = ({ data }) => {
                         </HStack>
                     </Stat>
                     <VStack mt="50px" alignItems="flex-start">
-                        <Text>Total Unique Items: 5</Text>
+                        <Text>Total Unique Items: {data?.length}</Text>
                         <Text>Total Quantity: 5</Text>
                         <Text>Total Unit Price: NRP. 5000</Text>
                         <Text>Total Amount: NRP. 5000</Text>
