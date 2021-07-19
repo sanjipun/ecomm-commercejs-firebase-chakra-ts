@@ -8,7 +8,7 @@ interface ProductCardProps {
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({ data }) => {
-    const history = useHistory()
+    const history = useHistory();
     return (
         <Box onClick={() => {
             history.push(`/product/${data?.id}`);
@@ -25,7 +25,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ data }) => {
             justifyContent="space-between"
             overflow="hidden" w={219} h={400}
         >
-            <Image src={data?.media.source} w="auto" h="330px" />
+            <Image src={data?.media?.source} w="auto" h="330px" />
             <Box borderTop="0.5px solid rgba(0,0,0,0.2)" h="100%" textAlign="center" backgroundColor="#fff">
                 <Text fontSize={14} >{data?.name}</Text>
                 <Text fontSize={12} >{data?.discount ? <><del>NPR. 200</del> {data?.price.raw}</> : "NRP. 2000"}</Text>

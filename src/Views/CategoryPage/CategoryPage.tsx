@@ -54,7 +54,7 @@ const CategoryPage: React.FC<CategoryProps> = () => {
 
     const fetchData = async () => {
         try {
-            const res = await API.get("/v1/categories")
+            const res = await API.get("/v1/products")
             setProductData(res.data.data)
         } catch (error) {
             console.log(error)
